@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const page = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userSession = sessionStorage.getItem("user");
+  const userSession = typeof window !== 'undefined' ? sessionStorage.getItem("user") : null;
 
   console.log({ user });
 

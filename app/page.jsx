@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userSession = sessionStorage.getItem("user");
+  const userSession = typeof window !== 'undefined' ? sessionStorage.getItem("user") : null;
   const [displayName, setDisplayName] = useState("");
   const [role, setRole] = useState("");
   const [bioDE, setBioDE] = useState("");
@@ -23,9 +23,6 @@ export default function Home() {
   const [file, setFile] = useState("");
   // Load GitHub file when user.displayName changes
   useEffect(() => {
-    if (!user && !userSession && user === null) {
-      router.push("/sign-in");
-    }
     const loadGitHubFile = async () => {
       const fileUrl =
         "https://raw.githubusercontent.com/ThiebaudReimann/LEGOminati/Website/json/team-members.json";
