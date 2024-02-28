@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userSession = typeof window !== 'undefined' ? sessionStorage.getItem("user") : null;
+  const [userSession, setUserSession] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [role, setRole] = useState("");
   const [bioDE, setBioDE] = useState("");
@@ -21,6 +21,12 @@ export default function Home() {
   const [avatar, setAvatar] = useState("");
   const [index, setIndex] = useState("");
   const [file, setFile] = useState("");
+
+  // Load user session from sessionStorage when component mounts
+  useEffect(() => {
+    const sessionUser = sessionStorage.getItem("user");
+    setUserSession(sessionUser);
+  }, []);
   // Load GitHub file when user.displayName changes
   useEffect(() => {
     const loadGitHubFile = async () => {
