@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import React from "react";
 import { auth } from "@/app/firebase/config";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import updateGitHubRepository from "@/app/api/updateRepo.mjs";
 import updateImage from "./api/updateImage.mjs";
@@ -11,7 +11,6 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-  const router = useRouter();
   const [user] = useAuthState(auth);
   const [userSession, setUserSession] = useState(null);
   const [displayName, setDisplayName] = useState("");
@@ -21,12 +20,14 @@ export default function Home() {
   const [avatar, setAvatar] = useState("");
   const [index, setIndex] = useState("");
   const [file, setFile] = useState("");
+  const router = useRouter(); // Move the useRouter hook inside useEffect
 
   // Load user session from sessionStorage when component mounts
   useEffect(() => {
     const sessionUser = sessionStorage.getItem("user");
     setUserSession(sessionUser);
   }, []);
+
   // Load GitHub file when user.displayName changes
   useEffect(() => {
     const loadGitHubFile = async () => {
@@ -71,7 +72,7 @@ export default function Home() {
     if (user && user.displayName) {
       loadGitHubFile();
     }
-  }, [user]);
+  }, [user, router]); // Include router as a dependency
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     console.log(file);
@@ -125,19 +126,6 @@ export default function Home() {
   };
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        className="transition-all bounce"
-      />
       <ToastContainer />
       <header className="bg-gray-900 p-4 flex justify-between items-center text-white">
         <div>LEGOminati Dashboard</div>
