@@ -72,7 +72,8 @@ export default function Home() {
     if (user && user.displayName) {
       loadGitHubFile();
     }else {
-      router.reload();
+      console.error("RELOAD");
+      router.replace("/sign-in");
     }
   }, [user, router]); // Include router as a dependency
   const handleFileUpload = async (event) => {
