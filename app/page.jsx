@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import React from "react";
 import { auth } from "@/app/firebase/config";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
 import updateGitHubRepository from "@/app/api/updateRepo.mjs";
 import updateImage from "./api/updateImage.mjs";
@@ -11,8 +11,8 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-  const [user] = useAuthState(auth);
   const router = useRouter();
+  const [user] = useAuthState(auth);
   const [userSession, setUserSession] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [role, setRole] = useState("");
