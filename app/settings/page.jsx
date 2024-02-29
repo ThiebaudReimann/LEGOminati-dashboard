@@ -25,7 +25,7 @@ const Page = () => {
     }, [user, userSession]);
 
     const handleBack = () => {
-        useRouter().back();
+        router.push("/")
     };
     const handleSignOut = async () => {
         try {
