@@ -21,9 +21,12 @@ export default function Home() {
   const [index, setIndex] = useState("");
   const [file, setFile] = useState("");
   const router = useRouter(); // Move the useRouter hook inside useEffect
-  const sessionUser = sessionStorage.getItem("user");
-  setUserSession(sessionUser);
+
   // Load user session from sessionStorage when component mounts
+  useEffect(() => {
+    const sessionUser = sessionStorage.getItem("user");
+    setUserSession(sessionUser);
+  }, [sessionUser]);
 
   // Load GitHub file when user.displayName changes
   useEffect(() => {
