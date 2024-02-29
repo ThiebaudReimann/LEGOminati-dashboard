@@ -150,9 +150,7 @@ export default function Home() {
       <main className="flex bg-gray-900 mx-10">
         <div className="text-white w-full grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <h1 className="text-2xl mb-5">
-              Willkommen {user ? user.displayName : router.push("/sign-in")},{" "}
-            </h1>
+            
             <img src={avatar} alt="" width="100px" className="p-3 mb-4" />
             <input
               type="file"
