@@ -85,7 +85,7 @@ export default function Home() {
       let link = avatar;
       if (file) {
         const uploadFile = file;
-        const newFileNameWithoutExtension = "avatar-" + user.displayName.toLowerCase(); // Ersetzen Sie dies durch den gewünschten Dateinamen ohne Endung
+        const newFileNameWithoutExtension = "avatar-" + index; // Ersetzen Sie dies durch den gewünschten Dateinamen ohne Endung
 
         const extension = uploadFile.type.split("/")[1];
         const newFileName = `${newFileNameWithoutExtension}.${extension}`;
