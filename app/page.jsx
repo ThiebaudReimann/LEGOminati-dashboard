@@ -63,22 +63,17 @@ export default function Home() {
         }
         return { gitDisplayName, gitRole, gitBioDE, gitBioEN, gitImg, index };
       } catch (error) {
-        console.error(
-          "Fehler beim Laden der Datei von der URL:",
-          error.message
-        );
+        toast.error(error.message);
       }
     };
     if (user && user.displayName) {
       loadGitHubFile();
     }else {
-      console.error("RELOAD");
       router.replace("/sign-in");
     }
   }, [user, router]); // Include router as a dependency
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
     const url = URL.createObjectURL(file);
     setAvatar(url);
     setFile(file);
@@ -99,7 +94,6 @@ export default function Home() {
           type: uploadFile.type,
         });
         link = await updateImage(newFile);
-        console.log(link);
       }
       const build = {
         id: index + 1,
@@ -124,7 +118,6 @@ export default function Home() {
       toast.success("Erfolgreich Hochgeladen!");
     } catch (error) {
       toast.error("Fehler beim Hochladen!");
-      console.error("Fehler beim Laden der Datei von der URL:", error.message);
     }
   };
   return (

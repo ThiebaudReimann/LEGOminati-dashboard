@@ -18,9 +18,7 @@ const SignIn = () => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
       if (!res) {
-        console.error("Sign in failed. Please try again.");
         toast.error("Login fehlgeschlagen!");
         setEmail("");
         setPassword("");
@@ -37,10 +35,10 @@ const SignIn = () => {
             res.user.displayName = userData.displayName;
             res.user.index = userData.index;
           } else {
-            console.log("No such document!");
+            toast.error("No such document!");
           }
         } else {
-          console.error("User or user ID is null or undefined");
+          toast.error("User or user ID is null or undefined");
         }
 
         sessionStorage.setItem("user", true);
@@ -49,7 +47,6 @@ const SignIn = () => {
         router.push("/");
       }
     } catch (e) {
-      console.error(e);
     }
   };
 
@@ -83,12 +80,10 @@ const SignIn = () => {
           onClick={() => {
             sendPasswordResetEmail(auth, email)
               .then(() => {
-                console.log("Password reset email sent!");
                 toast.success("Email gesendet!");
               })
               .catch((e) => {
                 toast.error("Email nicht vorhanden!");
-                console.error(e);
               });
           }}
         >

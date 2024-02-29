@@ -32,7 +32,6 @@ const Page = () => {
             await signOut(auth);
             setUserSession(null);
         } catch (e) {
-            console.error(e);
             toast.error(e.message);
         }
     };
@@ -42,7 +41,6 @@ const Page = () => {
             await sendPasswordResetEmail(auth, user.email);
             toast.success("Email gesendet!");
         } catch (e) {
-            console.error(e);
             toast.error("Email nicht vorhanden!");
         }
     };
