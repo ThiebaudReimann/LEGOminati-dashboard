@@ -26,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     const sessionUser = sessionStorage.getItem("user");
     setUserSession(sessionUser);
-  }, [sessionUser]);
+  }, []);
 
   // Load GitHub file when user.displayName changes
   useEffect(() => {
