@@ -18,7 +18,7 @@ export default function Home() {
   const [bioDE, setBioDE] = useState("");
   const [bioEN, setBioEN] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [index, setIndex] = useState("");
+  const [currentindex, setCurrentIndex] = useState("");
   const [file, setFile] = useState("");
   const router = useRouter(); // Move the useRouter hook inside useEffect
 
@@ -53,7 +53,7 @@ export default function Home() {
           setRole(gitRole || "");
           setBioDE(gitBioDE || "");
           setBioEN(gitBioEN || "");
-          setIndex(index || "");
+          setCurrentIndex(index || "");
           const inputPath = gitImg;
           const baseUrl = "https://www.letsgominati.de/";
 
@@ -61,7 +61,7 @@ export default function Home() {
           const fullPath = inputPath.replace("../", baseUrl);
           setAvatar(fullPath);
         }
-        return { gitDisplayName, gitRole, gitBioDE, gitBioEN, gitImg, index };
+        return { gitDisplayName, gitRole, gitBioDE, gitBioEN, gitImg };
       } catch (error) {
         toast.error(error.message);
       }
@@ -187,7 +187,7 @@ export default function Home() {
               type="submit"
               onClick={() => {
                 handleUploadtoGithub(
-                  index,
+                  currentindex,
                   {
                     name: displayName,
                     role: role,
