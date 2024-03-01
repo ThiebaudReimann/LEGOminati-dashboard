@@ -96,7 +96,7 @@ export default function Home() {
         link = await updateImage(newFile);
       }
       const build = {
-        id: index + 1,
+        id: index,
         name: fields.name,
         description: fields.role,
         img: link || "",
